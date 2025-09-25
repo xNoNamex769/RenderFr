@@ -1,0 +1,641 @@
+/* ------------------------
+   TARJETAS DE EVENTO
+------------------------ */
+.evento-app-lista-eventos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.evento-app-tarjeta-evento {
+  background: var(--card-light);
+  border-radius: 24px;
+  box-shadow: var(--shadow-light);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid var(--border-light);
+  position: relative;
+}
+
+.evento-app-tarjeta-evento::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-primary);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.evento-app-tarjeta-evento:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+.evento-app-tarjeta-evento:hover::before {
+  transform: scaleX(1);
+}
+
+.evento-app-cabecera-evento {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem;
+  gap: 1rem;
+  position: relative;
+}
+
+.evento-app-foto-usuario {
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border: 3px #5eb319;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+  transition: all 0.3s ease;
+}
+
+.evento-app-cabecera-evento:hover .evento-app-foto-usuario {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.3);
+}
+
+.evento-app-info-usuario p {
+  margin: 0;
+}
+
+.evento-app-nombre-usuario {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--text-light);
+}
+
+.evento-app-fecha-evento {
+  font-size: 0.9rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.evento-app-contenido-evento {
+  padding: 0 1.5rem 1.5rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #475569;
+}
+
+.evento-app-acciones-evento {
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem 1.5rem 1.5rem;
+  gap: 1rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-top: 1px solid var(--border-light);
+}
+
+.evento-app-boton-me-gusta,
+.evento-app-boton-disgusto,
+.evento-app-boton-comentar {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  background: white;
+  color: #64748b;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid var(--border-light);
+  position: relative;
+  overflow: hidden;
+}
+
+.evento-app-boton-me-gusta::before,
+.evento-app-boton-disgusto::before,
+.evento-app-boton-comentar::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  transform: translate(-50%, -50%);
+}
+
+.evento-app-boton-me-gusta:hover::before,
+.evento-app-boton-disgusto:hover::before,
+.evento-app-boton-comentar:hover::before {
+  width: 100%;
+  height: 100%;
+}
+
+.evento-app-boton-me-gusta:hover,
+.evento-app-boton-disgusto:hover,
+.evento-app-boton-comentar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.evento-app-boton-me-gusta.activo {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border-color: #10b981;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.evento-app-boton-disgusto.activo {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+  border-color: #ef4444;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+/* ------------------------
+   MODO OSCURO PARA EVENTOS
+------------------------ */
+@media (prefers-color-scheme: dark) {
+  .evento-app-tarjeta-evento {
+    background: var(--card-dark);
+    color: var(--text-dark);
+    border-color: var(--border-dark);
+    box-shadow: var(--shadow-dark);
+  }
+
+  .evento-app-boton-me-gusta,
+  .evento-app-boton-disgusto,
+  .evento-app-boton-comentar {
+    background: var(--card-dark);
+    color: var(--text-dark);
+    border-color: var(--border-dark);
+  }
+
+  .evento-app-boton-me-gusta:hover,
+  .evento-app-boton-disgusto:hover,
+  .evento-app-boton-comentar:hover {
+    background: #374151;
+  }
+
+  .evento-app-boton-me-gusta.activo {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+  }
+
+  .evento-app-boton-disgusto.activo {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: white;
+  }
+
+  .evento-app-contenido-evento {
+    color: #cbd5e1;
+  }
+
+  .evento-app-nombre-usuario {
+    color: var(--text-dark);
+  }
+
+  .evento-app-acciones-evento {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    border-color: var(--border-dark);
+  }
+}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --sena-verde: #5eb319;
+  --sena-naranja: #f97316;
+  --sena-azul: #1d4ed8;
+  --gris-claro: #f3f4f6;
+  --gris-oscuro: #374151;
+  --borde: #e5e7eb;
+  --fondo: #ffffff;
+  --negro: #111827;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--gris-claro);
+  color: var(--negro);
+}
+
+.evento-app-body {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.evento-app-contenedor-principal {
+  width: 100%;
+  max-width: 1100px;
+  background-color: var(--fondo);
+  border-radius: 1rem;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.evento-app-cabecera {
+  color: white;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.evento-app-titulo-seccion {
+  color: black;
+  font-size: 1.75rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.titulo-intro {
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 1rem 0;
+  font-weight: 600;
+}
+
+.evento-app-seccion-historias {
+  text-align: center;
+  padding: 1rem;
+}
+
+.evento-app-carrusel-historias {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+.evento-app-historia {
+  flex: 0 0 auto;
+  width: 140px;
+  cursor: pointer;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background-color: var(--fondo);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+.evento-app-historia:hover {
+  transform: scale(1.03);
+}
+
+.evento-app-historia p {
+  text-align: center;
+  padding: 0.5rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.evento-app-seccion-botones-accion {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  flex-wrap: wrap;
+}
+
+.evento-app-boton-accion {
+  background-color: var(--sena-verde);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background 0.3s;
+  cursor: pointer;
+}
+.evento-app-boton-accion:hover {
+  background-color: var(--sena-naranja);
+}
+
+.evento-app-seccion-feed {
+  padding: 1rem;
+}
+
+.evento-app-tarjeta-evento {
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.06);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+.evento-app-tarjeta-evento:hover {
+  transform: scale(1.01);
+}
+
+.evento-app-cabecera-evento {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.evento-app-info-usuario {
+  font-size: 0.95rem;
+}
+
+.evento-app-nombre-usuario {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.evento-app-fecha-evento {
+  color: #6b7280;
+}
+
+.evento-app-contenido-evento {
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: #374151;
+}
+
+.evento-app-acciones-evento {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.evento-app-boton-me-gusta,
+.evento-app-boton-disgusto,
+.evento-app-boton-comentar {
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.evento-app-boton-me-gusta {
+  background-color: #e0f7f1;
+  color: #065f46;
+}
+.evento-app-boton-disgusto {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+.evento-app-boton-comentar {
+  background-color: var(--sena-azul);
+  color: white;
+}
+.evento-app-boton-me-gusta.activo,
+.evento-app-boton-disgusto.activo {
+  font-weight: bold;
+  border: 2px solid currentColor;
+}
+
+/* Modal */
+.evento-app-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(229, 229, 231, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  padding: 1rem;
+}
+
+.evento-app-modal-contenido {
+  background-color: white;
+  max-width: 600px;
+  width: 100%;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  position: relative;
+  overflow-y: auto;
+  max-height: 90vh;
+}
+
+.evento-app-modal-cerrar {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  font-size: 1.25rem;
+  border: none;
+  cursor: pointer;
+}
+
+.evento-app-modal-banner img {
+  border-radius: 0.75rem;
+}
+
+.evento-app-modal-titulo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 1rem;
+}
+
+.evento-app-modal-detalles p,
+.evento-app-modal-descripcion p {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+}
+
+.evento-app-modal-organizador {
+  margin-top: 1rem;
+}
+.evento-app-modal-perfil {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.evento-app-modal-reacciones {
+  margin-top: 1rem;
+}
+
+.evento-app-modal-reacciones h4 {
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+.evento-app-modal-reacciones ul {
+  margin-left: 1rem;
+  list-style-type: disc;
+}
+/* -----------------------------
+   MODAL ESTILO SENA FUTURISTA
+------------------------------ */
+
+.evento-app-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(10px);
+  background: rgba(14, 13, 13, 0.75);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.evento-app-modal-contenido {
+  background: rgba(50, 83, 50, 0.9); /* Verde oscuro translúcido */
+  border-radius: 16px;
+  padding: 2rem;
+  max-width: 700px;
+  width: 90%;
+  color: #e8ffe8; /* Verde muy claro, casi blanco */
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  position: relative;
+  animation: scaleIn 0.3s ease;
+  overflow-y: auto;
+  max-height: 90vh;
+}
+
+.evento-app-modal-cerrar {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 1.6rem;
+  color: #10b981;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.evento-app-modal-cerrar:hover {
+  transform: scale(1.2);
+}
+
+.evento-app-modal-titulo {
+  font-size: 2rem;
+  text-align: center;
+  margin: 1rem 0;
+  color: #10b981;
+  text-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+  font-weight: 600;
+}
+
+.evento-app-modal-banner img {
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.3);
+}
+
+.evento-app-modal-detalles p,
+.evento-app-modal-descripcion p,
+.evento-app-modal-organizador p {
+  margin: 0.6rem 0;
+  font-size: 1rem;
+  color: #d9fce0;
+}
+
+.evento-app-modal-organizador h4,
+.evento-app-modal-reacciones h4 {
+  margin-top: 1.5rem;
+  color: #a7f3d0;
+  font-weight: 500;
+  text-shadow: 0 0 6px rgba(16, 185, 129, 0.4);
+}
+
+.evento-app-modal-reacciones ul {
+  list-style: none;
+  padding-left: 1rem;
+  margin-top: 0.5rem;
+}
+
+.evento-app-modal-reacciones li {
+  padding: 2px 0;
+  color: #d1fae5;
+}
+
+/* Animaciones suaves */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.evento-app-modal-feedbacks {
+  margin-top: 1.5rem;
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-radius: 8px;
+}
+.estado-reaccion {
+  margin-top: 6px;
+  font-weight: 500;
+  color: #2e7d32; /* verde fuerte para 'Te gustó' */
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.estado-reaccion span {
+  background-color: #e0f2f1;
+  padding: 4px 8px;
+  border-radius: 12px;
+  display: inline-block;
+  color: #004d40;
+  font-size: 13.5px;
+}
+.estado-feedback {
+  margin-top: 6px;
+  background-color: #f3f4f6;
+  padding: 6px 10px;
+  border-left: 4px solid #00796b;
+  border-radius: 8px;
+  color: #333;
+  font-size: 13.5px;
+  font-style: italic;
+}
+
+.estado-feedback p {
+  margin: 2px 0;
+}
+.estado-feedback {
+  margin-top: 8px;
+  background-color: #f3f4f6;
+  padding: 8px 12px;
+  border-left: 4px solid #00796b;
+  border-radius: 8px;
+  color: #333;
+  font-size: 13.5px;
+  font-style: italic;
+  transition: all 0.3s ease;
+}
+
+.estado-feedback p {
+  margin: 4px 0;
+}
+
+.color-eventoa{
+  color: black;
+}

@@ -1,0 +1,397 @@
+.cal-admin-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+}
+
+.cal-main-content {
+  padding: 1rem;
+}
+
+.cal-app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.cal-app-title {
+  font-size: 1.6rem;
+  color: #333;
+}
+
+.cal-sena-text {
+  color: #5eb319;
+  font-weight: bold;
+}
+
+.cal-notifications-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  font-size: 1.5rem;
+  padding: 0.3rem;
+}
+
+.cal-notifications-btn.cal-active {
+  color: #0066cc;
+}
+
+.cal-bell-icon {
+  font-size: 1.8rem;
+}
+
+.cal-notification-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: #e74c3c;
+  color: white;
+  font-size: 0.75rem;
+  padding: 2px 6px;
+  border-radius: 50%;
+  font-weight: bold;
+}
+
+.cal-notifications-panel {
+  position: absolute;
+  top: 3.5rem;
+  right: 0;
+  width: 320px;
+  max-height: 400px;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border-radius: 8px;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+.cal-notifications-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.cal-close-notifications {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #666;
+}
+
+.cal-notifications-list {
+  max-height: 350px;
+  overflow-y: auto;
+}
+
+.cal-notification-item {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.cal-notification-item:hover {
+  background-color: #f0f8ff;
+}
+
+.cal-notification-img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-right: 0.75rem;
+}
+
+.cal-notification-content h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: #333;
+}
+
+.cal-notification-content p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+/* Calendario */
+
+.cal-calendar-section {
+  margin-top: 1.5rem;
+}
+
+.cal-calendar-container {
+  background: white;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.cal-calendar-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.cal-month-btn {
+  cursor: pointer;
+  font-size: 1.4rem;
+  background: none;
+  border: none;
+  color: #5eb319;
+  transition: color 0.3s;
+  padding: 0.2rem 0.7rem;
+  border-radius: 5px;
+}
+
+.cal-month-btn:hover {
+  color: #5eb319;
+  background-color: #e6f0ff;
+}
+
+.cal-current-month {
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  color: #333;
+}
+
+.cal-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.4rem;
+}
+
+.cal-week-day {
+  font-weight: bold;
+  color: #555;
+  text-align: center;
+  padding: 0.5rem 0;
+  background-color: #e9ecef;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+/* Días */
+
+.cal-dia {
+  min-height: 75px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0.3rem 0.5rem;
+  font-size: 0.85rem;
+  position: relative;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  cursor: default;
+  transition: background-color 0.3s;
+}
+
+.cal-dia:hover {
+  background-color: #f9f9f9;
+}
+
+.cal-dia-vacio {
+  border: none;
+  background: transparent;
+  cursor: default;
+}
+
+.cal-dia-numero {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 0.2rem;
+}
+
+.cal-evento {
+  cursor: pointer;
+  background-color: #e6f0ff;
+  border-color: #a3c9ff;
+}
+
+.cal-evento:hover {
+  background-color: #c7deff;
+}
+
+.cal-dia-clickable {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.cal-nombre-evento {
+  font-size: 0.75rem;
+  color: #5eb319;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-top: auto;
+}
+
+.cal-hoy {
+  border: 2px solid #5eb319;
+}
+
+.cal-noti-icon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: #888;
+  cursor: pointer;
+  transition: color 0.3s;
+  font-size: 1rem;
+}
+
+.cal-noti-icon:hover {
+  color: #004a99;
+}
+
+.cal-clicked {
+  color: #5eb319 !important;
+}
+
+/* Modal */
+
+.cal-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.cal-event-modal-container {
+  background: white;
+  max-width: 600px;
+  width: 100%;
+  border-radius: 8px;
+  padding: 1.5rem;
+  position: relative;
+  box-shadow: 0 0 15px rgba(0,0,0,0.25);
+}
+
+.cal-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #666;
+  transition: color 0.3s;
+}
+
+.cal-modal-close:hover {
+  color: #000;
+}
+
+.cal-event-modal-title {
+  margin-top: 0;
+  color: #5eb319;
+}
+
+.cal-event-modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cal-event-modal-image {
+  width: 100%;
+  max-height: 250px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.cal-event-details p {
+  margin: 0.3rem 0;
+  color: #333;
+}
+
+.cal-event-participation {
+  margin: 1rem 0;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.cal-btn-confirmar, .cal-btn-feedback {
+  cursor: pointer;
+  background-color: #5eb319;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  transition: background-color 0.3s;
+}
+
+.cal-btn-confirmar:hover, .cal-btn-feedback:hover {
+  background-color: #004a99;
+}
+
+.cal-asistencia-confirmada {
+  color: #2ecc71;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+/* Feedback modal (nested modal) */
+
+.cal-event-modal-content label {
+  font-weight: bold;
+  margin-top: 0.7rem;
+  display: block;
+}
+
+.cal-event-modal-content input[type="number"],
+.cal-event-modal-content textarea {
+  width: 100%;
+  padding: 0.4rem;
+  margin-top: 0.3rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 0.9rem;
+  resize: vertical;
+}
+
+.cal-event-modal-content button {
+  margin-top: 1rem;
+  background-color: #0066cc;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.cal-event-modal-content button:hover {
+  background-color: #004a99;
+}

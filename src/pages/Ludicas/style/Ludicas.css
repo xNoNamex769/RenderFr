@@ -1,0 +1,433 @@
+:root {
+  --primary-color: #5eb319;       /* Verde SENA */
+  --secondary-color: #0753df;     /* Verde suave */
+  --accent-color: #0b3d2e;        /* Verde oscuro para íconos y detalles */
+  --light-color: #ffffff;         /* Blanco puro */
+  --bg-color: #f4fdf7;            /* Fondo general */
+  --card-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+.ludicas-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: var(--bg-color);
+  overflow-x: hidden;
+}
+
+/* Cabecera */
+.ludicas-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.ludicas-title {
+  font-size: 2.8rem;
+  font-weight: bold;
+  color: var(--accent-color);
+  margin-bottom: 0.5rem;
+}
+
+.ludicas-subtitle {
+  font-size: 1.2rem;
+  color: var(--secondary-color);
+  margin-bottom: 2rem;
+}
+
+/* Buscador */
+.search-barr {
+  display: flex;
+  max-width: 500px;
+  margin: 0 auto;
+  box-shadow: var(--card-shadow);
+  border-radius: 30px;
+  overflow: hidden;
+  background-color: var(--light-color);
+}
+
+.search-barr input {
+  flex: 1;
+  padding: 0.8rem 1.2rem;
+  border: none;
+  font-size: 1rem;
+  outline: none;
+  color: var(--accent-color);
+}
+
+.search-btn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0 1.5rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.search-btn:hover {
+  background-color: var(--accent-color);
+}
+
+/* Grid de tarjetas */
+.ludicas-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+/* Tarjeta */
+.ludicas-card {
+  background: var(--light-color);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  transition: var(--transition);
+  flex: 1 1 300px;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ludicas-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.card-image-container {
+  position: relative;
+  height: 180px;
+  overflow: hidden;
+}
+
+.ludicas-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition);
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.35));
+}
+
+.ludicas-card-content {
+  padding: 1.5rem;
+  flex: 1;
+}
+
+/* Título e info */
+.card-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--accent-color);
+}
+
+.card-info {
+  margin-bottom: 1.2rem;
+  color: var(--secondary-color);
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.info-item i {
+  margin-right: 0.5rem;
+  color: var(--primary-color);
+}
+
+/* Horarios */
+.schedule-section {
+  margin-top: 1rem;
+}
+
+.schedule-title {
+  font-weight: 600;
+  color: var(--accent-color);
+  margin-bottom: 0.4rem;
+  display: flex;
+  align-items: center;
+}
+
+.schedule-title i {
+  margin-right: 0.5rem;
+  color: var(--primary-color);
+}
+
+.schedule-list {
+  list-style: none;
+  padding-left: 1rem;
+}
+
+.schedule-list li {
+  position: relative;
+  padding-left: 1rem;
+  margin-bottom: 0.3rem;
+}
+
+.schedule-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--primary-color);
+}
+
+/* Botón */
+.ludicas-btn {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ludicas-btn i {
+  margin-right: 0.5rem;
+}
+
+.ludicas-btn:hover {
+  background-color: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+/* Footer */
+.ludicas-footer {
+  text-align: center;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid #cce5d4;
+  color: var(--secondary-color);
+}
+
+.ludicas-footer a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.ludicas-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .ludicas-title {
+    font-size: 2.2rem;
+  }
+
+  .ludicas-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+/* Badge dentro de la tarjeta */
+.categoria-badge {
+  background-color: var(--secondary-color);
+  color: white;
+  font-size: 0.75rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: 20px;
+  display: inline-block;
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Filtro de Categorías */
+.categorias-filter {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+
+.categoria-btn {
+  padding: 0.6rem 1.2rem;
+  background-color: white;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.categoria-btn.active,
+.categoria-btn:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+.categoria-badge {
+  background-color: var(--secondary-color);
+  color: white;
+  font-size: 0.75rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  display: inline-block;
+  margin-bottom: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.categorias-filter {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+
+.categoria-btn {
+  padding: 0.6rem 1.2rem;
+  background-color: white;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.categoria-btn.active,
+.categoria-btn:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  max-width: 600px;
+  width: 100%;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.modal-close:hover {
+  background: #e54848;
+}
+
+.modal-img {
+  width: 100%;
+  margin-top: 1rem;
+  border-radius: 12px;
+  object-fit: cover;
+  max-height: 300px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+.interesado-btn {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: bold;
+}
+
+.interesado-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.interesado-btn.active {
+  background-color: #ffefef;
+  border-color: #f66;
+  color: #e11d48;
+}
+.interesado-btn {
+  background-color: #ffe0e6;
+  color: #d6336c;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.interesado-btn:hover {
+  transform: scale(1.05);
+  background-color: #ffd6df;
+}
+
+.interesado-btn.active {
+  background-color: #ffb3c1;
+  color: white;
+  transform: scale(1.1);
+}
+
+.interesado-btn.animating {
+  animation: pulse 0.4s ease;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.interesado-btn.active {
+  color: red;
+  transform: scale(1.2);
+  transition: all 0.2s ease-in-out;
+}

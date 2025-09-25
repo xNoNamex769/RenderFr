@@ -1,0 +1,174 @@
+/* Estilos específicos para el componente de Registro */
+.formulario-registro {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.grupo-campo-registro {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.etiqueta-registro {
+  color: #374151;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.etiqueta-registro-desktop {
+  font-size: 1rem;
+}
+
+.asterisco-obligatorio-registro {
+  color: #ef4444;
+  margin-left: 0.25rem;
+}
+
+.contenedor-input-registro {
+  position: relative;
+}
+
+.icono-input-registro {
+  position: absolute;
+  left: 0.75rem;
+  top: 1px;
+  height: 1rem;
+  width: 1rem;
+  color: #9ca3af;
+  fill: currentColor;
+}
+
+.campo-input-registro {
+  width: 100%;
+  height: 3rem;
+  padding-left: 2.5rem;
+  padding-right: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background-color: white;
+  box-sizing: border-box;
+}
+
+.campo-input-registro:focus {
+  outline: none;
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.campo-input-registro::placeholder {
+  color: #9ca3af;
+}
+
+.campo-input-registro:invalid {
+  border-color: #59595f;
+}
+
+.campo-input-registro:invalid:focus {
+  border-color: #44ef6f;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.grilla-campos-registro {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.grilla-campos-registro-desktop {
+  grid-template-columns: 1fr 1fr;
+}
+
+.contenedor-terminos-registro {
+  display: flex;
+  align-items: flex-start;
+  margin-right: 100px;
+}
+
+.checkbox-terminos-registro {
+  width: 1rem;
+  height: 1rem;
+  margin-top: 0.25rem;
+  border-radius: 0.25rem;
+  border: 1px solid #d1d5db;
+  accent-color: #10b981;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.checkbox-terminos-registro:focus {
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.texto-terminos-registro {
+  font-size: 0.75rem;
+  color: #4b5563;
+  line-height: 1.5;
+}
+
+.texto-terminos-registro-desktop {
+  font-size: 0.875rem;
+}
+
+.enlace-terminos-registro {
+  color: #10b981;
+  text-decoration: none;
+  transition: color 0.2s;
+  cursor: pointer;
+}
+
+.enlace-terminos-registro:hover {
+  color: #059669;
+  text-decoration: underline;
+}
+
+.boton-registro {
+  width: 100%;
+  background-color: #10b981;
+  color: white;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0.75rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.boton-registro:hover {
+  background-color: #21ce3e;
+}
+
+.boton-registro:active {
+  transform: translateY(1px);
+}
+
+.boton-registro:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.mensaje-error-registro {
+  font-size: 0.75rem;
+  color: #ef4444;
+  margin-top: 0.25rem;
+}
+
+.campo-valido-registro {
+  border-color: #10b981;
+}
+
+.campo-invalido-registro {
+  border-color: #ef4444;
+}
+
+@media (min-width: 768px) {
+  .grilla-campos-registro {
+    grid-template-columns: 1fr 1fr;
+  }
+}

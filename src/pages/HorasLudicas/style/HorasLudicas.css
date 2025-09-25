@@ -1,0 +1,446 @@
+/* Contenedor general */
+.horas-ludicas-container {
+  max-width: 850px;
+  margin: 3rem auto;
+  background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+  padding: 3rem 2.5rem;
+  border-radius: 20px;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.08),
+    0 10px 20px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #1f2937;
+  position: relative;
+  overflow: hidden;
+}
+
+.horas-ludicas-container::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.03) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Encabezado mejorado */
+.horas-ludicas-header {
+  background: linear-gradient(135deg, #e6f9e6 0%, #f0f9ff 50%, #ffffff 100%);
+  padding: 3rem 2rem;
+  text-align: center;
+  border-radius: 18px;
+  box-shadow: 
+    0 8px 24px rgba(45, 106, 79, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  margin-bottom: 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.horas-ludicas-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #5eb319, #678f47, #ebeef5);
+  border-radius: 18px 18px 0 0;
+}
+
+.intro-banner {
+  max-width: 750px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.titulo-ludicas {
+  font-size: 2.6rem;
+  color: #2d6a4f;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 4px rgba(45, 106, 79, 0.1);
+  letter-spacing: -0.02em;
+}
+
+.subtitulo-ludicas {
+  font-size: 1.2rem;
+  color: #4b5563;
+  margin-bottom: 0.8rem;
+  font-weight: 500;
+}
+
+.frase-motivacional {
+  font-style: italic;
+  color: #5c7c64;
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.horas-ludicas-header h2 {
+  font-size: 2.6rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+  text-align: center;
+  background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+}
+
+/* Contenido principal */
+.horas-ludicas-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  margin-bottom: 3rem;
+}
+
+/* Lista de actividades mejorada */
+.horas-ludicas-activities {
+  flex: 1 1 380px;
+  background: linear-gradient(145deg, #f9fafb 0%, #ffffff 100%);
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 
+    0 8px 20px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(226, 232, 240, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.horas-ludicas-activities::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #5eb319, #e8ecf5);
+  border-radius: 16px 16px 0 0;
+}
+
+.horas-ludicas-activities h3 {
+  font-size: 1.7rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.horas-ludicas-activities h3::before {
+  content: '📚';
+  font-size: 1.2rem;
+}
+
+.horas-ludicas-activities ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.actividad-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.2rem;
+  margin-bottom: 0.8rem;
+  background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+  border-radius: 12px;
+  border: 1px solid rgba(226, 232, 240, 0.6);
+  font-size: 1rem;
+  color: #475569;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.actividad-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+  border-color: rgba(37, 99, 235, 0.3);
+}
+
+.actividad-item:last-child {
+  margin-bottom: 0;
+}
+
+.actividad-nombre {
+  font-weight: 600;
+  flex: 0 0 40%;
+  color: #334155;
+}
+
+.actividad-horas {
+  flex: 0 0 25%;
+  text-align: center;
+  color: #2563eb;
+  font-weight: 700;
+  background: linear-gradient(135deg, #dbeafe, #eff6ff);
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.actividad-fecha {
+  flex: 0 0 30%;
+  text-align: right;
+  font-style: italic;
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+/* Resumen lateral mejorado */
+.horas-ludicas-summary {
+  flex: 1 1 320px;
+  background: linear-gradient(145deg, #eff6ff 0%, #5eb319 130%);
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 
+    0 12px 24px rgba(37, 99, 235, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  text-align: center;
+  border: 1px solid rgba(199, 210, 254, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.horas-ludicas-summary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #eff6ff, #5eb319);
+  border-radius: 16px 16px 0 0;
+}
+
+.horas-ludicas-summary h3 {
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+  color: #000000;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.horas-ludicas-summary h3::before {
+  content: '🎯';
+  font-size: 1.2rem;
+}
+
+.horas-ludicas-summary p {
+  font-size: 1.1rem;
+  color: #1e3a8a;
+  margin: 0.8rem 0;
+  font-weight: 500;
+}
+
+/* Botón de certificado mejorado */
+.btn-certificado {
+  background: linear-gradient(135deg, #5eb319 0%, #5eb319 100%);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-top: 1.5rem;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  width: 100%;
+  max-width: 280px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+}
+
+.btn-certificado::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-certificado:hover {
+  background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+}
+
+.btn-certificado:hover::before {
+  left: 100%;
+}
+
+.btn-certificado.btn-disabled {
+  background: linear-gradient(135deg, #5eb319 0%, #d4e6cd 100%);
+  color: #e2e8f0;
+  cursor: not-allowed;
+  font-weight: 600;
+  transform: none;
+  box-shadow: 0 4px 8px rgba(148, 163, 184, 0.2);
+}
+
+/* Barra de progreso mejorada */
+.progress-bar {
+  width: 100%;
+  height: 32px;
+  background: linear-gradient(145deg, #e0e7ff, #f1f5f9);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 
+    inset 0 2px 4px rgba(0, 0, 0, 0.06),
+    0 1px 2px rgba(0, 0, 0, 0.05);
+  margin: 1.5rem 0;
+  border: 1px solid rgba(147, 197, 253, 0.3);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-fill::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.2), transparent);
+  border-radius: 20px 20px 0 0;
+}
+
+/* Info adicional mejorada */
+.horas-ludicas-info {
+  padding: 2rem;
+  background: linear-gradient(145deg, #f8fafc 0%, #ffffff 100%);
+  border-radius: 16px;
+  border: 1px solid rgba(226, 232, 240, 0.5);
+  font-size: 1rem;
+  color: #334155;
+  line-height: 1.7;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.horas-ludicas-info h3 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: #5eb319;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.horas-ludicas-info h3::before {
+  content: 'ℹ️';
+  font-size: 1.1rem;
+}
+
+/* Mensaje de éxito mejorado */
+.mensaje-exito {
+  color: #16a34a;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  background: linear-gradient(135deg, #dcfce7, #f0fdf4);
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.1);
+  position: relative;
+}
+
+.mensaje-exito::before {
+  content: '✅';
+  margin-right: 0.5rem;
+  font-size: 1.1rem;
+}
+
+/* Responsividad mejorada */
+@media (max-width: 768px) {
+  .horas-ludicas-container {
+    margin: 1.5rem;
+    padding: 2rem 1.5rem;
+  }
+  
+  .horas-ludicas-content {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .titulo-ludicas {
+    font-size: 2.2rem;
+  }
+  
+  .actividad-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .actividad-nombre,
+  .actividad-horas,
+  .actividad-fecha {
+    flex: none;
+    width: 100%;
+    text-align: left;
+  }
+  
+  .actividad-horas {
+    align-self: flex-start;
+  }
+}
+
+/* Animaciones suaves */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.horas-ludicas-container {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.actividad-item {
+  animation: fadeInUp 0.4s ease-out;
+}
+
+.actividad-item:nth-child(1) { animation-delay: 0.1s; }
+.actividad-item:nth-child(2) { animation-delay: 0.2s; }
+.actividad-item:nth-child(3) { animation-delay: 0.3s; }
+.actividad-item:nth-child(4) { animation-delay: 0.4s; }
+.actividad-item:nth-child(5) { animation-delay: 0.5s; }

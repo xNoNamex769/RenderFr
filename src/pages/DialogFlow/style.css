@@ -1,0 +1,89 @@
+.chatdf-container {
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  background: #fff;
+}
+
+.chatdf-box {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.msgdf {
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 80%;
+}
+
+.msgdf.user {
+  background: #d1f7c4;
+  align-self: flex-end;
+}
+
+.msgdf.bot {
+  background: #f1f1f1;
+  align-self: flex-start;
+}
+
+.chatdf-input {
+  display: flex;
+  padding: 8px;
+  border-top: 1px solid #ccc;
+}
+
+.chatdf-input input {
+  flex: 1;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.chatdf-input button {
+  margin-left: 6px;
+  padding: 8px 12px;
+  border: none;
+  background: #007bff;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  width: 200px;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.card-img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 5px;
+}
+
+.card h4 {
+  margin: 5px 0;
+  font-size: 16px;
+}
+
+.msgdf.bot {
+  margin-bottom: 10px;
+}
+
