@@ -25,7 +25,7 @@ interface Planificacion {
   NombreEvento: string;
   FechaEvento: string;
   LugarDeEvento: string;
-  ImagenEvento?: string;
+  ImagenEvento?: string; // ahora contendrá la URL de Cloudinary
   usuario: Usuario;
   gestionEvento: GestionEvento;
 }
@@ -36,37 +36,28 @@ const PlanificacionesEventos: React.FC = () => {
   const [modalImagen, setModalImagen] = useState<string | null>(null);
   const [pestanaActiva, setPestanaActiva] = useState<"pendientes" | "aprobados">("pendientes");
   const [modalRechazoId, setModalRechazoId] = useState<number | null>(null);
-const [motivoRechazo, setMotivoRechazo] = useState("");
+  const [motivoRechazo, setMotivoRechazo] = useState("");
 
-const rechazarEvento = async (idGestionE: number, motivo: string) => {
-  try {
-    const token = localStorage.getItem("token");
-    await axios.put(
-      `https://render-hhyo.onrender.com/api/gestionevento/rechazar/${idGestionE}`,
-      { motivo },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    setMensaje("❌ Evento rechazado correctamente.");
-    fetchEventos();
-  } catch (error: any) {
-    console.error("Error al rechazar evento", error);
-    setMensaje(error.response?.data?.error || "Error al rechazar el evento");
-  }
-};
-
-  const fetchEventos = async () => {
+  // Rechazar evento
+  const rechazarEvento = async (idGestionE: number, motivo: string) => {
     try {
-      const res = await axios.get("https://render-hhyo.onrender.com/api/planificacionevento");
-      setEventos(res.data);
-    } catch (error) {
-      console.error("Error al cargar eventos", error);
+      const token = localStorage.getItem("token");
+      await axios.put(
+        `https://render-hhyo.onrender.com/api/gestionevento/rechazar/${idGestionE}`,
+        { motivo },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      setMensaje("❌ Evento rechazado correctamente.");
+      fetchEventos();
+    } catch (error: any) {
+      console.error("Error al rechazar evento", error);
+      setMensaje(error.response?.data?.error || "Error al rechazar el evento");
     }
   };
 
+  // Aprobar evento
   const aprobarEvento = async (idGestionE: number) => {
     try {
       const token = localStorage.getItem("token");
@@ -74,9 +65,7 @@ const rechazarEvento = async (idGestionE: number, motivo: string) => {
         `https://render-hhyo.onrender.com/api/gestionevento/aprobar/${idGestionE}`,
         {},
         {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { Authorization: `Bearer ${token}` },
         }
       );
       setMensaje("✅ Evento aprobado correctamente.");
@@ -87,13 +76,23 @@ const rechazarEvento = async (idGestionE: number, motivo: string) => {
     }
   };
 
+  // Cargar eventos
+  const fetchEventos = async () => {  
+    try {
+      const res = await axios.get("https://render-hhyo.onrender.com/api/planificacionevento");
+      setEventos(res.data);
+    } catch (error) {
+      console.error("Error al cargar eventos", error);
+    }
+  };
+
   useEffect(() => {
     fetchEventos();
   }, []);
 
+  // Filtros
   const eventosAprobados = eventos.filter((e) => e.gestionEvento?.Aprobar === "Aprobado");
   const eventosPendientes = eventos.filter((e) => e.gestionEvento?.Aprobar === "Pendiente");
-
   const eventosAMostrar = pestanaActiva === "pendientes" ? eventosPendientes : eventosAprobados;
 
   return (
@@ -118,37 +117,39 @@ const rechazarEvento = async (idGestionE: number, motivo: string) => {
         </button>
       </div>
 
-      <table className="pe-tabla">
-  {modalRechazoId && (
-  <div className="modal-imagen-fondo" onClick={() => setModalRechazoId(null)}>
-    <div className="modal-imagen-contenido" onClick={(e) => e.stopPropagation()}>
-      <button className="modal-cerrar" onClick={() => setModalRechazoId(null)}>✖</button>
-      <h3>Motivo del rechazo</h3>
-      <textarea
-        rows={4}
-        value={motivoRechazo}
-        onChange={(e) => setMotivoRechazo(e.target.value)}
-        placeholder="Escribe el motivo..."
-        style={{ width: "100%", padding: "0.5rem", marginBottom: "1rem" }}
-      />
-      <button
-        className="pe-boton"
-        onClick={() => {
-          if (modalRechazoId && motivoRechazo.trim()) {
-            rechazarEvento(modalRechazoId, motivoRechazo.trim());
-            setModalRechazoId(null);
-            setMotivoRechazo("");
-          } else {
-            alert("Debes escribir un motivo de rechazo.");
-          }
-        }}
-      >
-        Confirmar rechazo
-      </button>
-    </div>
-  </div>
-)}
+      {/* Modal de rechazo */}
+      {modalRechazoId && (
+        <div className="modal-imagen-fondo" onClick={() => setModalRechazoId(null)}>
+          <div className="modal-imagen-contenido" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-cerrar" onClick={() => setModalRechazoId(null)}>✖</button>
+            <h3>Motivo del rechazo</h3>
+            <textarea
+              rows={4}
+              value={motivoRechazo}
+              onChange={(e) => setMotivoRechazo(e.target.value)}
+              placeholder="Escribe el motivo..."
+              style={{ width: "100%", padding: "0.5rem", marginBottom: "1rem" }}
+            />
+            <button
+              className="pe-boton"
+              onClick={() => {
+                if (modalRechazoId && motivoRechazo.trim()) {
+                  rechazarEvento(modalRechazoId, motivoRechazo.trim());
+                  setModalRechazoId(null);
+                  setMotivoRechazo("");
+                } else {
+                  alert("Debes escribir un motivo de rechazo.");
+                }
+              }}
+            >
+              Confirmar rechazo
+            </button>
+          </div>
+        </div>
+      )}
 
+      {/* Tabla de eventos */}
+      <table className="pe-tabla">
         <thead>
           <tr>
             <th>Imagen</th>
@@ -165,16 +166,12 @@ const rechazarEvento = async (idGestionE: number, motivo: string) => {
           {eventosAMostrar.map((e) => (
             <tr key={e.IdPlanificarE}>
               <td>
-        
-
                 {e.ImagenEvento ? (
                   <img
-                    src={`http://localhost:3001/uploads/${e.ImagenEvento}`}
+                    src={e.ImagenEvento} // ahora directamente URL de Cloudinary
                     alt="Imagen del evento"
                     className="pe-miniatura"
-                    onClick={() =>
-                      setModalImagen(`http://localhost:3001/uploads/${e.ImagenEvento}`)
-                    }
+                    onClick={() => setModalImagen(e.ImagenEvento!)}
                     style={{ cursor: "pointer" }}
                     title="Ver imagen en grande"
                   />
@@ -193,32 +190,31 @@ const rechazarEvento = async (idGestionE: number, motivo: string) => {
                   : "✅ Aprobado"}
               </td>
               <td>
-  {e.gestionEvento?.Aprobar === "Pendiente" ? (
-    <>
-      <button
-        className="pe-boton"
-        onClick={() => {
-          if (e.gestionEvento?.IdGestionE) {
-            aprobarEvento(e.gestionEvento.IdGestionE);
-          } else {
-            alert("❌ No se encontró el ID de gestión del evento.");
-          }
-        }}
-      >
-        ✅ Aprobar
-      </button>
-      <button
-        className="pe-boton pe-boton-rechazo"
-        onClick={() => setModalRechazoId(e.gestionEvento?.IdGestionE || null)}
-      >
-        ❌ Rechazar
-      </button>
-    </>
-  ) : (
-    <span style={{ color: "green", fontWeight: "bold" }}>✔️</span>
-  )}
-</td>
-
+                {e.gestionEvento?.Aprobar === "Pendiente" ? (
+                  <>
+                    <button
+                      className="pe-boton"
+                      onClick={() => {
+                        if (e.gestionEvento?.IdGestionE) {
+                          aprobarEvento(e.gestionEvento.IdGestionE);
+                        } else {
+                          alert("❌ No se encontró el ID de gestión del evento.");
+                        }
+                      }}
+                    >
+                      ✅ Aprobar
+                    </button>
+                    <button
+                      className="pe-boton pe-boton-rechazo"
+                      onClick={() => setModalRechazoId(e.gestionEvento?.IdGestionE || null)}
+                    >
+                      ❌ Rechazar
+                    </button>
+                  </>
+                ) : (
+                  <span style={{ color: "green", fontWeight: "bold" }}>✔️</span>
+                )}
+              </td>
             </tr>
           ))}
         </tbody>
@@ -228,9 +224,7 @@ const rechazarEvento = async (idGestionE: number, motivo: string) => {
       {modalImagen && (
         <div className="modal-imagen-fondo" onClick={() => setModalImagen(null)}>
           <div className="modal-imagen-contenido" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-cerrar" onClick={() => setModalImagen(null)}>
-              ✖
-            </button>
+            <button className="modal-cerrar" onClick={() => setModalImagen(null)}>✖</button>
             <img src={modalImagen} alt="Imagen ampliada" className="modal-imagen" />
           </div>
         </div>

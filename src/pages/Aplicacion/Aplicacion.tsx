@@ -230,7 +230,7 @@ const Aplicacion = () => {
 
                   <div className="evento-app-contenido-evento">
                     <p>{evento.DescripcionEvento}</p>
-                    <p>📍 {evento.UbicacionEvento}</p>
+                    <p> {evento.UbicacionEvento}</p>
                   </div>
 
                   <div className="evento-app-acciones-evento">
@@ -241,7 +241,7 @@ const Aplicacion = () => {
                         manejarReaccion(evento.IdEvento, "like");
                       }}
                     >
-                      👍 Me gusta ({reacciones[evento.IdEvento]?.like || 0})
+                       Me gusta ({reacciones[evento.IdEvento]?.like || 0})
                     </button>
                     <button
                       className={`evento-app-boton-disgusto ${miReaccion[evento.IdEvento] === "dislike" ? "activo" : ""}`}
@@ -250,7 +250,7 @@ const Aplicacion = () => {
                         manejarReaccion(evento.IdEvento, "dislike");
                       }}
                     >
-                      👎 No me gusta ({reacciones[evento.IdEvento]?.dislike || 0})
+                       No me gusta ({reacciones[evento.IdEvento]?.dislike || 0})
                     </button>
                     <button
                       className="evento-app-boton-comentar"
@@ -262,7 +262,7 @@ const Aplicacion = () => {
                         }, 100);
                       }}
                     >
-                      📝 Feedback
+                       Feedback
                     </button>
                     {miReaccion[evento.IdEvento] && (
                       <div className="estado-reaccion">
@@ -340,7 +340,7 @@ const Aplicacion = () => {
 
             <div className="evento-app-modal-reacciones">
               <div className="evento-app-modal-feedbacks">
-                <h4>📝 Comentarios de los asistentes:</h4>
+                <h4> Comentarios de los asistentes:</h4>
                 {feedbacksModal.length === 0 ? (
                   <p>No hay comentarios aún.</p>
                 ) : (
@@ -356,13 +356,13 @@ const Aplicacion = () => {
                 )}
               </div>
 
-              <h4>👍 Usuarios que dieron Me gusta:</h4>
+              <h4> Usuarios que dieron Me gusta:</h4>
               <ul>
                 {detallesReacciones.filter((r) => r.Tipo === "like").map((u) => (
                   <li key={u.IdUsuario}>{u.Nombre} {u.Apellido}</li>
                 ))}
               </ul>
-              <h4>👎 Usuarios que dieron No me gusta:</h4>
+              <h4> Usuarios que dieron No me gusta:</h4>
               <ul>
                 {detallesReacciones.filter((r) => r.Tipo === "dislike").map((u) => (
                   <li key={u.IdUsuario}>{u.Nombre} {u.Apellido}</li>

@@ -67,30 +67,20 @@
 }
 
 .encabezadodash {
-  /* Estilo base */
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  margin-bottom: 20px;
   padding: 14px 30px;
-
-  /* Colores */
+  margin-top: -20px;
   background-color: #5eb319;
   color: white;
   font-family: 'Segoe UI', sans-serif;
   font-size: 1.1rem;
-
-  /* Diseño visual */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  border-bottom-left-radius: 12px;
-  border-bottom-right-radius: 12px;
-
-  /* Eliminar posicionamiento que causa scroll */
- 
-
  
 }
+
+
 
 
 .busquedadash {
@@ -212,7 +202,6 @@
 
 
 .Clogodash {
-  border-radius: 30px;
   background-color: #5eb319;
   display: flex;
   align-items: center;
@@ -438,11 +427,10 @@ margin-right: 00px;
   justify-content: space-between;
   background-color: #5eb319;
   padding: 10px 15px;
-  border-radius: 20px;
   max-width: 230px;
   position: relative;
   margin-bottom: 20px;
-  box-shadow: 0 4px 10px rgba(0, 128, 0, 0.2);
+  border-radius: 15px;
 }
 
 .avatardash {
@@ -481,12 +469,12 @@ margin-right: 00px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(90deg, #3edb0e, 0%, #3edb0e, 100%);
-  border-radius: 20px;
+  background-color: #5eb319;
   padding: 10px 15px;
   margin-bottom: 20px;
+  margin-top: -20px; 
   position: relative;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%; 
 }
 
 .UserHeaderInfo {
@@ -502,7 +490,6 @@ margin-right: 00px;
   border-radius: 50%;
   object-fit: cover;
   margin-right: 10px;
-  border: 2px solid #5eb319;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 

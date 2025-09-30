@@ -15,7 +15,7 @@ import ChatAI from "../src/pages/ChatAI/ChatAI";
 import UserView from "../src/pages/UserView/UserView";
 import Navbar from "../src/pages/DashBoard/DashBoardComponents/DashA/Navbar";
 import ConfigView from "../src/pages/ConfigView/ConfigView";
-
+import SubirAprendices from "../src/pages/SubirAprendices/SubirAprendices"
 import GestionCatalogo from "../src/pages/AlquierAP/GestionFormulario";
 import FormularioCatalogo from "../src/pages/AlquierAP/FormularioCatalogo";
 import Administrador from "../src/pages/SolicitudApoyo/Administrador";
@@ -25,6 +25,8 @@ import AdminConstancias from "../src/pages/ConstanciaCertificado/Admin/AdminCons
 import PlanificarEventosAdmin from "../src/pages/PlanificarEv/Admin/PlanificarEventosAdmin"
 import ResumenIA from "../src/Components/ResumenIA/ResumenIA";
 import AdminLudicas from "../src/pages/Ludicas/Admin/AdminLudicas";
+import Registro from "../public/Registro";
+
 // Estilos globales
 import "../src/styles/BotHp.css";
 import "../src/styles/ColaViento.css";
@@ -123,6 +125,8 @@ export default function DashBoard() {
         {contenidoActual === "gestioncatalogo" && <GestionCatalogo />}
         {contenidoActual === "formulariocatalogo" && <FormularioCatalogo />}
         {contenidoActual === "planificareventosadmin" && <PlanificarEventosAdmin/>}
+        {contenidoActual === "registrarfuncionarios" && <Registro/>}
+        {contenidoActual === "subiraprendiz" && <SubirAprendices/>}
          {contenidoActual === "adminconstancias" && <AdminConstancias />}
            {contenidoActual === "adminludicas" && <AdminLudicas />}
             {contenidoActual === "listatrimestre" && <ListaTrimestre />}

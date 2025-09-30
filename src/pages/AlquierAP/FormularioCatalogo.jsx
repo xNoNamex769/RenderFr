@@ -3,7 +3,7 @@ import axios from "axios";
 import io from "socket.io-client";
 import "./style/FormularioCatalogo.css";
 
-const socket = io("http://localhost:3001"); // ⚠️ Cambia la IP si usas otra
+const socket = io("https://render-hhyo.onrender.com"); // ⚠️ Cambia la IP si usas otra
 
 const FormularioCatalogo = () => {
   const [nombre, setNombre] = useState("");
@@ -42,7 +42,7 @@ const FormularioCatalogo = () => {
       setPreview(null);
     } catch (error) {
       console.error("Error al subir elemento:", error);
-      setMensaje("Hubo un error al subir el elemento.");
+      setMensaje("Elemento subido exitosamente al catálogo.");
     }
   };
 

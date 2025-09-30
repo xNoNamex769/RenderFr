@@ -50,7 +50,7 @@ const PerfilInstructorForm = () => {
 setFormData({
   profesion: res.data.profesion || '',
   ubicacion: res.data.ubicacion || '',
-  imagen: imagenEsBase64 ? res.data.imagen : `http://localhost:3001${res.data.imagen}` || '',
+  imagen: imagenEsBase64 ? res.data.imagen : `https://render-hhyo.onrender.com${res.data.imagen}` || '',
 });
 
         }

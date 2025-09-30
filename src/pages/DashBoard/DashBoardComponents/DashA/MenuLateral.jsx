@@ -15,11 +15,19 @@ import {
   FaBoxOpen,
   FaChevronDown,
   FaChevronRight,
+  FaRegCaretSquareRight,
+  FaRegUserCircle ,
 } from "react-icons/fa";
+
+import { PiPersonSimpleThrowLight, PiCodeBlockFill, PiBoxArrowUpThin } from "react-icons/pi";
+import { MdEventAvailable,  MdQrCode2, MdAppRegistration, MdOutlinePermContactCalendar  } from "react-icons/md";
+import { TfiDropbox } from "react-icons/tfi";
 
 import logo from "../img/logo.png";
 import avatar from "../img/avatar.png";
 import "../DashA/style/MenuLateral.css"
+import { useAuth } from "../../../../Context/AuthContext";
+
 
 export default function MenuLateral({ menuAbierto, toggleMenu, setContenidoActual }) {
   const [mostrarMenu, setMostrarMenu] = useState(false);
@@ -30,6 +38,9 @@ export default function MenuLateral({ menuAbierto, toggleMenu, setContenidoActua
     documentos: false,
     temas:false,
   });
+
+    const { logout } = useAuth(); // ✅ usamos logout
+  
 
   const toggleDropdown = () => setMostrarMenu(prev => !prev);
   const toggleSection = (section) => {
@@ -92,10 +103,10 @@ export default function MenuLateral({ menuAbierto, toggleMenu, setContenidoActua
           {openSection.eventos && (
             <>
               <button onClick={() => setContenidoActual("actividad")} className="opciondash">
-                <FaRegCheckCircle className="iconodash" /> Actividades
+                <PiPersonSimpleThrowLight className="iconodash" /> Actividades
               </button>
               <button onClick={() => setContenidoActual("aplicacion")} className="opciondash">
-                <FaCalendarAlt className="iconodash" /> Eventos
+                <MdEventAvailable className="iconodash" /> Eventos
               </button>
               {/* <button onClick={() => setContenidoActual("calendario")} className="opciondash">
                 <FaCalendarAlt className="iconodash" /> Calendario
@@ -112,20 +123,20 @@ export default function MenuLateral({ menuAbierto, toggleMenu, setContenidoActua
           {openSection.alquiler && (
             <>
               <button onClick={() => setContenidoActual("registroa")} className="opciondash">
-                <FaQrcode className="iconodash" /> Registro Prestamo
+                <MdQrCode2  className="iconodash" /> Registro Prestamo
               </button>
               <button onClick={() => setContenidoActual("detallea")} className="opciondash">
-                <	FaInfoCircle className="iconodash" /> Detalles Prestamos
+                <	PiCodeBlockFill className="iconodash" /> Detalles Prestamos
               </button>
               <button onClick={() => setContenidoActual("gestioncatalogo")} className="opciondash">
-                <FaBoxOpen className="iconodash" /> Elementos Subidos
+                <TfiDropbox className="iconodash" /> Elementos Subidos
               </button>
               <button onClick={() => setContenidoActual("formulariocatalogo")} className="opciondash">
-                <FaUpload className="iconodash" /> SubirCarrusel
+                <PiBoxArrowUpThin className="iconodash" /> SubirCarrusel
               </button>
 
                <button onClick={() => setContenidoActual("registrarelemento")} className="opciondash">
-                <FaUpload className="iconodash" /> SubirElemento
+                <PiBoxArrowUpThin className="iconodash" /> SubirElemento
               </button>
 
 
@@ -175,10 +186,16 @@ export default function MenuLateral({ menuAbierto, toggleMenu, setContenidoActua
                 <FaUserGraduate className="iconodash" /> ConstanciaAD
               </button>
               <button onClick={() => setContenidoActual("cartacontacto")} className="opciondash">
-                <FaAddressBook className="iconodash" /> Contactos
+                <FaRegUserCircle className="iconodash" /> Contactos
               </button>
                <button onClick={() => setContenidoActual("planificareventosadmin")} className="opciondash">
-                <FaAddressBook className="iconodash" /> AprobarEventos
+                <MdAppRegistration className="iconodash" /> AprobarEventos
+              </button>
+              <button onClick={() => setContenidoActual("registrarfuncionarios")} className="opciondash">
+                <MdAppRegistration className="iconodash" /> Registrar
+              </button>
+              <button onClick={() => setContenidoActual("subiraprendiz")} className="opciondash">
+                <MdAppRegistration className="iconodash" /> Subir Aprendiz
               </button>
                  {/* <button onClick={() => setContenidoActual("adminludicas")} className="opciondash">
                 <FaChartBar className="iconodash" /> Ludicas Aprendices
@@ -216,7 +233,9 @@ export default function MenuLateral({ menuAbierto, toggleMenu, setContenidoActua
 </div> */}
 
        
-        <img src={logo} alt="Logo"  className="logo-dashboard-general"/>
+        <button className="btn-cerrar-sesion" onClick={logout}>
+                  <FaRegCaretSquareRight   className="icono-cerrar" /> Cerrar Sesión
+        </button>
       </nav>
     </aside>
   );

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./styles/AprobarEventos.css"; // crea este archivo o usa uno existente
-import PlanificacionesEventos from "./Admin/PlanificarEventosAdmin";
+import "./styles/AprobarEventos.css";
 import { useNavigate } from "react-router-dom";
 
-
+// Interfaces
 interface Usuario {
   Nombre: string;
   Apellido: string;
@@ -14,7 +13,7 @@ interface Usuario {
 interface GestionEvento {
   Aprobar: string;
   MotivoRechazo?: string;
-    gestionador?: Usuario; 
+  gestionador?: Usuario;
 }
 
 interface Evento {
@@ -29,18 +28,22 @@ interface Evento {
 
 const MisEventos: React.FC = () => {
   const [misEventos, setMisEventos] = useState<Evento[]>([]);
-const [modalAbierto, setModalAbierto] = useState(false);
-const [motivoActual, setMotivoActual] = useState("");
-const [mostrarPlanificador, setMostrarPlanificador] = useState(false);
-const abrirModal = (motivo: string) => {
-  setMotivoActual(motivo || "No especificado");
-  setModalAbierto(true);
-};
-const navigate = useNavigate();
-const cerrarModal = () => {
-  setModalAbierto(false);
-};
+  const [modalAbierto, setModalAbierto] = useState(false);
+  const [motivoActual, setMotivoActual] = useState("");
+  const navigate = useNavigate();
 
+  // 🔹 Abrir modal
+  const abrirModal = (motivo: string) => {
+    setMotivoActual(motivo || "No especificado");
+    setModalAbierto(true);
+  };
+
+  // 🔹 Cerrar modal
+  const cerrarModal = () => {
+    setModalAbierto(false);
+  };
+
+  // 🔹 Cargar eventos del usuario
   const cargarMisEventos = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -49,13 +52,15 @@ const cerrarModal = () => {
         return;
       }
 
-      const res = await axios.get("https://render-hhyo.onrender.com/api/planificacionevento/mis-eventos", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await axios.get(
+        "https://render-hhyo.onrender.com/api/planificacionevento/mis-eventos",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
       setMisEventos(res.data);
-      console.log(" Eventos recibidos:", res.data);
-
+      console.log("✅ Eventos recibidos:", res.data);
     } catch (error) {
       console.error("❌ Error al cargar mis eventos", error);
     }
@@ -65,19 +70,19 @@ const cerrarModal = () => {
     cargarMisEventos();
   }, []);
 
-
   return (
     <div className="mis-eventos-container">
       <h2 className="mis-eventos-title">📋 Mis eventos planificados</h2>
+
       <table className="mis-eventos-tabla">
         <thead>
           <tr>
-            <th>Evento</th>
-            <th>Fecha</th>
-            <th>Lugar</th>
-            <th>Estado</th>
-            <th>Gestionado por</th>
-            <th>Imagen</th>
+            <th className="th-text">Evento</th>
+            <th className="th-text">Fecha</th>
+            <th className="th-text">Lugar</th>
+            <th className="th-text">Gestionado por</th>
+            <th className="th-text">Estado</th>
+            <th className="th-text">Imagen</th>
           </tr>
         </thead>
         <tbody>
@@ -86,32 +91,44 @@ const cerrarModal = () => {
               <td>{evento.NombreEvento}</td>
               <td>{new Date(evento.FechaEvento).toLocaleDateString()}</td>
               <td>{evento.LugarDeEvento}</td>
-              
-<td>
-  {evento.gestionEvento?.Aprobar === "Aprobado" ? (
-    <span className="estado-aprobado">✅ Aprobado</span>
-  ) : evento.gestionEvento?.Aprobar === "Pendiente" ? (
-    <span className="estado-pendiente">⏳ Pendiente</span>
-  ) : (
-    <button
-  className="btn-ver-rechazo"
-  onClick={() => abrirModal(evento.gestionEvento?.MotivoRechazo || "Motivo no especificado")}
->
-  ❌ Rechazado - Ver detalles
-</button>
-  )}
-</td>
-<td>
-  {evento.gestionEvento?.gestionador
-    ? `${evento.gestionEvento.gestionador.Nombre} ${evento.gestionEvento.gestionador.Apellido}`
-    : "No asignado"}
-</td>
 
+              {/* Estado del evento */}
+              <td>
+                {evento.gestionEvento?.Aprobar === "Aprobado" ? (
+                  <span className="estado-aprobado">✅ Aprobado</span>
+                ) : evento.gestionEvento?.Aprobar === "Pendiente" ? (
+                  <span className="estado-pendiente">⏳ Pendiente</span>
+                ) : (
+                  <button
+                    className="btn-ver-rechazo"
+                    onClick={() =>
+                      abrirModal(
+                        evento.gestionEvento?.MotivoRechazo ||
+                          "Motivo no especificado"
+                      )
+                    }
+                  >
+                    ❌ Rechazado - Ver detalles
+                  </button>
+                )}
+              </td>
 
+              {/* Gestionador */}
+              <td>
+                {evento.gestionEvento?.gestionador
+                  ? `${evento.gestionEvento.gestionador.Nombre} ${evento.gestionEvento.gestionador.Apellido}`
+                  : "No asignado"}
+              </td>
+
+              {/* Imagen */}
               <td>
                 {evento.ImagenEvento ? (
                   <img
-                    src={`http://localhost:3001/uploads/${evento.ImagenEvento}`}
+                    src={
+                      evento.ImagenEvento.startsWith("http")
+                        ? evento.ImagenEvento // ✅ Cloudinary o URL externa
+                        : `https://render-hhyo.onrender.com/uploads/${evento.ImagenEvento}` // ✅ Render backend
+                    }
                     alt="Evento"
                     className="miniatura-img"
                   />
@@ -123,21 +140,23 @@ const cerrarModal = () => {
           ))}
         </tbody>
       </table>
+
+      {/* Modal de rechazo */}
       {modalAbierto && (
-  <div className="modal-overlay">
-    <div className="modal-contenido">
-      <h3>📌 Motivo del Rechazo</h3>
-      <p>{motivoActual}</p>
+        <div className="modal-overlay">
+          <div className="modal-contenido">
+            <h3>📌 Motivo del Rechazo</h3>
+            <p>{motivoActual}</p>
 
-      <button className="btn2apr" onClick={cerrarModal}>Cerrar</button>
-<button className="btn1apr" onClick={() => navigate("/planevento")}>
-  Planificar de nuevo
-</button>
-    </div>
-  </div>
-)}
-
-
+            <button className="btn2apr" onClick={cerrarModal}>
+              Cerrar
+            </button>
+            <button className="btn1apr" onClick={() => navigate("/planevento")}>
+              Planificar de nuevo
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
