@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./style/CartaContacto.css";
-import aleximg from './img/alex.png'; // (No estás usándolo, podrías eliminarlo)
 import logoSena from './img/logo-sena.png';
 import defaultImg from './img/defecto.png';
 import axios from "axios";
@@ -40,19 +39,21 @@ const VerContactosInstructores = () => {
     (perfil.profesion ?? "").toLowerCase().includes(filtroProfesion.toLowerCase())
   );
 
+  // Devuelve la imagen válida o un placeholder si está vacía
   const getImagenValida = (img: string) => {
-    return img && img.trim() !== "" ? img : logoSena;
+    return img && img.trim() !== "" ? img : defaultImg;
   };
 
   return (
     <div className="pagina-contacto-unica">
       <header className="header-contacto-unico">
-        <img src={defaultImg} alt="logo nosotros" className="logo-nosotros-contacto" />
+        <img src={logoSena} alt="logo sena" className="logo-nosotros-contacto" />
         <h1 className="texto-instructor-contacto">
           Contactos Instructores y Funcionarios SENA
         </h1>
       </header>
 
+      {/* Filtros */}
       <div className="filtros-multicampo-contacto">
         <input
           type="text"
@@ -77,6 +78,7 @@ const VerContactosInstructores = () => {
         />
       </div>
 
+      {/* Tarjetas */}
       <div className="card-container-contacto">
         {filtrados.map((perfil, idx) => (
           <div
@@ -91,12 +93,14 @@ const VerContactosInstructores = () => {
               src={getImagenValida(perfil.imagen)}
               alt={perfil.nombre}
               className="card-image-contacto"
+              onError={(e) => (e.currentTarget.src = defaultImg)}
             />
             <h3>{perfil.nombre}</h3>
           </div>
         ))}
       </div>
 
+      {/* Modal */}
       {perfilActivo && (
         <div className="modal-overlay" onClick={() => setPerfilActivo(null)}>
           <div className="modal-contenido" onClick={(e) => e.stopPropagation()}>
@@ -105,6 +109,7 @@ const VerContactosInstructores = () => {
               src={getImagenValida(perfilActivo.imagen)}
               className="imagen-modal"
               alt="Instructor"
+              onError={(e) => (e.currentTarget.src = defaultImg)}
             />
             <h2>{perfilActivo.nombre}</h2>
             <p><strong>Correo:</strong> {perfilActivo.correo}</p>

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './style/CartaInstructor.css';
 import { obtenerIdUsuario } from '../../utils/getDecodedToken';
+import defaultImg from './img/avatar.png'; 
 
 interface FormData {
   profesion: string;
@@ -33,8 +34,12 @@ const PerfilInstructorForm = () => {
   const [instructores, setInstructores] = useState<Instructor[]>([]);
   const [filtroNombre, setFiltroNombre] = useState('');
   const [instructorActivo, setInstructorActivo] = useState<Instructor | null>(null);
-
   const [filtroUbicacion, setFiltroUbicacion] = useState('');
+
+  // 👉 Función para validar imagen
+  const getImagenValida = (img: string) => {
+    return img && img.trim() !== "" ? img : defaultImg;
+  };
 
   // Cargar mi perfil + lista de instructores
   useEffect(() => {
@@ -46,13 +51,16 @@ const PerfilInstructorForm = () => {
       try {
         const res = await axios.get(`https://render-hhyo.onrender.com/api/perfil-instructor/${id}`);
         if (res.data) {
-         const imagenEsBase64 = res.data.imagen?.startsWith("data:image");
-setFormData({
-  profesion: res.data.profesion || '',
-  ubicacion: res.data.ubicacion || '',
-  imagen: imagenEsBase64 ? res.data.imagen : `https://render-hhyo.onrender.com${res.data.imagen}` || '',
-});
-
+          const imagenEsBase64 = res.data.imagen?.startsWith("data:image");
+          setFormData({
+            profesion: res.data.profesion || '',
+            ubicacion: res.data.ubicacion || '',
+            imagen: imagenEsBase64
+              ? res.data.imagen
+              : res.data.imagen
+              ? `https://render-hhyo.onrender.com${res.data.imagen}`
+              : '',
+          });
         }
       } catch {
         console.warn("⚠️ Aún no existe perfil.");
@@ -61,15 +69,16 @@ setFormData({
 
     const fetchInstructores = async () => {
       try {
-      const res = await axios.get(`https://render-hhyo.onrender.com/api/perfil-instructor`);
-const instructoresConImagenUrl = res.data.map((inst: Instructor) => ({
-  ...inst,
-  imagen: inst.imagen?.startsWith("data:image")
-    ? inst.imagen
-    : inst.imagen ? `http://localhost:3001${inst.imagen}` : '',
-}));
-setInstructores(instructoresConImagenUrl);
-
+        const res = await axios.get(`https://render-hhyo.onrender.com/api/perfil-instructor`);
+        const instructoresConImagenUrl = res.data.map((inst: Instructor) => ({
+          ...inst,
+          imagen: inst.imagen?.startsWith("data:image")
+            ? inst.imagen
+            : inst.imagen
+            ? `https://render-hhyo.onrender.com${inst.imagen}`
+            : '',
+        }));
+        setInstructores(instructoresConImagenUrl);
       } catch {
         console.error("❌ Error al cargar instructores.");
       }
@@ -140,25 +149,26 @@ setInstructores(instructoresConImagenUrl);
     setInstructores(res.data);
   };
 
-const instructoresFiltrados = instructores.filter(inst =>
-  (inst.nombre ?? "").toLowerCase().includes(filtroNombre.toLowerCase()) &&
-  (inst.ubicacion ?? "").toLowerCase().includes(filtroUbicacion.toLowerCase())
-);
+  const instructoresFiltrados = instructores.filter(inst =>
+    (inst.nombre ?? "").toLowerCase().includes(filtroNombre.toLowerCase()) &&
+    (inst.ubicacion ?? "").toLowerCase().includes(filtroUbicacion.toLowerCase())
+  );
 
   return (
     <div className="contenedor-form-perfil">
       {formData && (
-  <div className="mi-perfil-actual">
-    <h3> Mi perfil actual</h3>
-    <img
-      src={formData.imagen || '/img/defecto.png'}
-      alt="Mi imagen"
-      className="imagen-perfil-propia"
-    />
-    <p><strong>Profesión:</strong> {formData.profesion}</p>
-    <p><strong>Ubicación:</strong> {formData.ubicacion}</p>
-  </div>
-)}
+        <div className="mi-perfil-actual">
+          <h3> Mi perfil actual</h3>
+          <img
+            src={getImagenValida(formData.imagen)}
+            alt="Mi imagen"
+            className="imagen-perfil-propia"
+            onError={(e) => (e.currentTarget.src = defaultImg)}
+          />
+          <p><strong>Profesión:</strong> {formData.profesion}</p>
+          <p><strong>Ubicación:</strong> {formData.ubicacion}</p>
+        </div>
+      )}
 
       <h2>Crear o Editar Mi Perfil</h2>
       <form onSubmit={handleSubmit}>
@@ -188,6 +198,7 @@ const instructoresFiltrados = instructores.filter(inst =>
             src={formData.imagen}
             alt="Vista previa"
             style={{ width: '120px', marginTop: '10px', borderRadius: '8px' }}
+            onError={(e) => (e.currentTarget.src = defaultImg)}
           />
         )}
 
@@ -218,40 +229,45 @@ const instructoresFiltrados = instructores.filter(inst =>
 
       <div className="grid-instructores">
         {instructoresFiltrados.map((inst) => (
-  <div key={inst.UsuarioId} className="card-instructor">
-    <img
-      src={inst.imagen || '/img/defecto.png'}
-      alt={`Foto de ${inst.nombre}`}
-      className="imagen-instructor"
-    />
-    <h3>{inst.nombre}</h3>
-    <p><strong>Profesión:</strong> {inst.profesion || 'Sin definir'}</p>
-    <p><strong>Ubicación:</strong> {inst.ubicacion || 'No especificada'}</p>
+          <div key={inst.UsuarioId} className="card-instructor">
+            <img
+              src={getImagenValida(inst.imagen)}
+              alt={`Foto de ${inst.nombre}`}
+              className="imagen-instructor"
+              onError={(e) => (e.currentTarget.src = defaultImg)}
+            />
+            <h3>{inst.nombre}</h3>
+            <p><strong>Profesión:</strong> {inst.profesion || 'Sin definir'}</p>
+            <p><strong>Ubicación:</strong> {inst.ubicacion || 'No especificada'}</p>
 
-    <button
-      className="btn-ver-mas"
-      onClick={() => setInstructorActivo(inst)}
-    >
-      Ver más
-    </button>
-  </div>
-))}
-
+            <button
+              className="btn-ver-mas"
+              onClick={() => setInstructorActivo(inst)}
+            >
+              Ver más
+            </button>
+          </div>
+        ))}
       </div>
-      {instructorActivo && (
-  <div className="modal-overlay" onClick={() => setInstructorActivo(null)}>
-    <div className="modal-contenido" onClick={e => e.stopPropagation()}>
-      <button className="cerrar-modal" onClick={() => setInstructorActivo(null)}>×</button>
-      <img src={instructorActivo.imagen || '/img/defecto.png'} className="imagen-modal" />
-      <h2>{instructorActivo.nombre}</h2>
-      <p><strong>Correo:</strong> {instructorActivo.correo}</p>
-      <p><strong>Teléfono:</strong> {instructorActivo.telefono}</p>
-      <p><strong>Profesión:</strong> {instructorActivo.profesion}</p>
-      <p><strong>Ubicación:</strong> {instructorActivo.ubicacion}</p>
-    </div>
-  </div>
-)}
 
+      {instructorActivo && (
+        <div className="modal-overlay" onClick={() => setInstructorActivo(null)}>
+          <div className="modal-contenido" onClick={e => e.stopPropagation()}>
+            <button className="cerrar-modal" onClick={() => setInstructorActivo(null)}>×</button>
+            <img
+              src={getImagenValida(instructorActivo.imagen)}
+              className="imagen-modal"
+              alt="Instructor"
+              onError={(e) => (e.currentTarget.src = defaultImg)}
+            />
+            <h2>{instructorActivo.nombre}</h2>
+            <p><strong>Correo:</strong> {instructorActivo.correo}</p>
+            <p><strong>Teléfono:</strong> {instructorActivo.telefono}</p>
+            <p><strong>Profesión:</strong> {instructorActivo.profesion}</p>
+            <p><strong>Ubicación:</strong> {instructorActivo.ubicacion}</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
